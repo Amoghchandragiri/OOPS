@@ -1,0 +1,69 @@
+#include<iostream>
+using namespace std;
+class Shape
+{
+public:
+double length,breadth;
+//constructor to assign initial values to length and breadth
+Shape()
+{
+length=0;
+breadth=0;
+}
+//get_data() function to get values of length and breadth
+void get_data()
+{
+cout<<"\nEnter height and base to compute are :";
+cin>>length>>breadth;
+}
+//declaration of virtual function display_area()
+virtual void display_area()=0;
+};
+//class triangle inheriting class Shape
+class Triangle : public Shape
+{
+public:
+//redefining function display_area()
+void display_area()
+{
+cout<<"\nArea of Triangle = "<<(length*breadth)/2<<endl;
+}
+};
+//class Rectangle inheriting class Shape
+class Rectangle : public Shape
+{
+public:
+void display_area()
+{
+cout<<"\nArea of Rectangle = "<<length*breadth<<endl;
+}
+};
+int main()
+{
+Shape *s;
+Triangle t;
+Rectangle r;
+int ch;
+  while(1){
+cout<<"1.Calculate area of triangle:-"<<endl;
+cout<<"2.Calculate area of rectangle:-"<<endl;
+cout<<"Enter your choice:-"<<endl;
+cin>>ch;
+switch(ch){
+  case 1:
+  s=&t;
+s->get_data();
+s->display_area();
+  break;
+  case 2:
+  s=&r;
+s->get_data();
+s->display_area();
+  break;
+  default:
+  cout<<"Invalid choice"<<endl;
+  break;
+}    
+}
+  return 0;
+  }

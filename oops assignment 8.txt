@@ -1,0 +1,118 @@
+#include <iostream>
+#include <fstream>
+#include <cstring>
+using namespace std;
+class Employee {
+  int age, empid, salary;
+  string empname,department,post;
+public:
+  void read() {
+    cout << "Name of employee:-" << endl;
+    cin >> empname;
+    cout << "Id of employee:-" << endl;
+    cin >> empid;
+    cout << "Age of employee:-" << endl;
+    cin >> age;
+    cout << "Salary of employee:-" << endl;
+    cin >> salary;
+    cout << "Department of employee:-" << endl;
+    cin >> department;
+    cout << "Post of employee:-" << endl;
+    cin >> post;
+  }
+  void display() {
+    cout<<"Name of employee:-" << empname << endl;
+    cout<<"Age of employee:-" << age << endl;
+    cout<<"Department of employee:-" << department << endl;
+    cout<<"Post of employee:-" << post << endl;
+    cout<<"Salary of employee:-" << salary << endl;
+    cout<<"ID  of employee:-" << empid << endl;
+  }
+  int getID(){
+    return empid;
+  }
+};
+void DeleteExistingFile()
+  {
+    remove("filename");
+    }
+void writerecord() {
+  Employee obj;
+  obj.read();
+  ofstream fout;
+  fout.open("filename",ios::out| ios::binary | ios::app);
+  fout.write((char *)&obj, sizeof(obj));
+  fout.close();
+}
+void displayrecord() {
+  Employee obj;
+  ifstream fin;
+  fin.open("filename", ios::binary);
+  while ((fin.read((char *)&obj, sizeof(obj)))) {
+    obj.display();
+  }
+  fin.close();
+}
+void search() {
+  Employee obj;
+  int n;
+  cout << "Enter ID to search:-" << endl;
+  cin >> n;
+  ifstream fin;
+  fin.open("filename", ios::binary| ios::in);
+  while (fin.read((char *)&obj, sizeof(obj))) {
+    if (obj.getID() == n) {
+      obj.display();
+    }
+  }
+  fin.close();
+}
+void modify(){
+  Employee obj;
+  int m;
+  cout << "Enter ID to search:-" << endl;
+  cin >> m;
+  fstream fin;
+  fin.open("filename",ios::ate| ios::in| ::ios::out| ios::binary);
+  fin.seekg(0);
+  while(fin.read((char*)&obj,sizeof(obj))){
+    if (obj.getID() == m) {
+      cout<<"Enter new details of employee:-"<<endl;
+      obj.read();
+      int pos= ((-1) * sizeof(obj));
+      fin.seekp(pos,ios::cur);
+      fin.write((char*)&obj,sizeof(obj));
+      }
+    }
+  fin.close();
+  }
+int main() {
+  int ch;
+  DeleteExistingFile();
+  do {
+    cout << "1.Writing record" << endl;
+    cout << "2.Displaying record" << endl;
+    cout << "3.Searching record" << endl;
+    cout << "4.Modifying record" <<endl;
+    cout << "Enter your choice:-" << endl;
+    cin >> ch;
+    switch (ch) {
+    case 1:
+      writerecord();
+      break;
+    case 2:
+      displayrecord();
+      break;
+    case 3:
+      search();
+      break;
+        case 4:
+      modify();
+      break;
+    default:
+      cout << "Invalid choice" << endl;
+      break;
+    }
+  } while (1);
+  return 0;
+}

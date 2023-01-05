@@ -1,0 +1,103 @@
+#include <iostream>
+#include <map>
+using namespace std;
+
+class person
+{
+  string name;
+  long int bd,tele;
+  public :
+  void read()
+  {
+    cout<<"\nEnter Name : ";
+    cin>>name;
+    cout<<"Enter BirthDate : ";
+    cin>>bd;
+    cout<<"Enter Telephon Number : ";
+    cin>>tele;
+  }
+  
+  void display()
+  {
+    cout<<"\nName      : "<<name<<endl;
+    cout<<"BirthDate   : "<<bd<<endl;
+    cout<<"Telephon No : "<<tele<<endl;
+  }
+
+  string getname()
+  {
+    return name;
+  }
+};
+
+int main() 
+{
+  map<string,person> m;
+  map<string,person> :: iterator it;
+  person p;
+  string name,key,del;
+  int ch;
+
+  do
+  {
+    cout<<"\n1.Add"<<endl;
+    cout<<"2.Display"<<endl;
+    cout<<"3.Search"<<endl;
+    cout<<"4.Delete"<<endl;
+    cout<<"5.Update"<<endl;
+    cout<<"0.Exit "<<endl;
+    
+    cout << "\nEnter Choice : ";
+    cin >> ch;
+    
+    switch (ch) 
+    {
+      case 1:
+        p.read();
+        name=p.getname();
+        m.insert(pair<string,person>(name,p));
+      break;
+        
+  
+      case 2:
+        for(it=m.begin();it!=m.end();it++)
+        {
+          p=it->second;
+          p.display();
+        }
+      break;
+      
+      case 3:
+        cout<<"\nEnter Name to Search : ";
+        cin>>key;
+        it=m.find(key);
+        p=it->second;
+        p.display();
+      break;
+
+      case 4:
+        cout<<"\nEnter Name to Delete Data : ";
+        cin>>del;
+        it=m.find(del);
+        m.erase(it);
+      break;
+
+      case 5:
+        cout<<"\nEnter Name to Update Data : ";
+        cin>>key;
+        it=m.find(key);
+        m.erase(it);
+        p.read();
+        name=p.getname();
+        m.insert(pair<string,person>(name,p));
+
+      break;
+
+      case 0:
+      cout<<"End";
+      break;
+    
+    }
+  }while (ch!=0);
+return 0;
+}

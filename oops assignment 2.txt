@@ -1,0 +1,58 @@
+#include <iostream>
+#include<cstring>
+using namespace std;
+class Student
+{
+int Rollnumber,DOB;
+string Name,Class,Div,Bloodgroup;
+long int telenumber;
+static int count;
+public:
+Student(){
+  count++;
+}
+inline void read(){
+  cout<<"Enter the Student's name:-"<<endl;
+  cin>>Name;
+  cout<<"Enter the Student's roll number:-"<<endl;
+  cin>>Rollnumber;
+   cout<<"Enter the Student's Date of Birth:-"<<endl;
+  cin>>DOB;
+  cout<<"Enter the Student's Class:-"<<endl;
+  cin>>Class;
+  cout<<"Enter the Student's Division:-"<<endl;
+  cin>>Div;
+  cout<<"Enter the Student's Bloodgroup:-"<<endl;
+  cin>>Bloodgroup;
+  cout<<"Enter the student's telephone number:-"<<endl;
+  cin>>telenumber; 
+}
+void display(){
+  cout<<"Student's name is:-"<<Name<<endl;
+  cout<<"Roll number of student is:-"<<Rollnumber<<endl;
+  cout<<"Student's Class is:-"<<Class<<endl;
+  cout<<"Student's division is:-"<<Div<<endl;
+  cout<<"Blood group of student is:-"<<Bloodgroup<<endl;
+  cout<<"Telephone number of student is:-"<<telenumber<<endl;
+}
+~Student(){
+  count--;
+}
+static void display1(){
+  cout<<"Total number of students whose data is entered:-"<<count<<endl;
+}
+};
+int Student::count=0;
+int main()
+{
+  int n;
+  cout<<"Enter number of students:-"<<endl;
+  cin>>n;
+  Student obj[n];
+  for(int i=0;i<n;i++){
+    obj[i].read();
+    obj[i].display();
+  }
+  Student::display1();
+  return 0;
+}

@@ -1,0 +1,51 @@
+#include<iostream>
+#include<sstream>
+using namespace std;
+class Complex
+{
+int real,imag;
+public:
+Complex(){
+  real=0;
+  imag=0;
+}
+Complex(int r,int i){
+  real=r;
+  imag=i;
+}
+friend istream &operator>>(istream &input,Complex &c);
+friend ostream &operator<<(ostream &output,Complex &c);
+Complex operator + (Complex c2){
+  Complex ans;
+  ans.real= real + c2.real;
+  ans.imag=imag + c2.imag;
+  return ans;
+}
+Complex operator * (Complex c2){
+  Complex mul;
+  mul.real= real*c2.real - imag*c2.imag;
+  mul.imag= real*c2.imag + c2.real*imag;
+  return mul;
+}
+};
+istream &operator>>(istream &input,Complex &c){
+  cout<<"Enter real and imaginary part:-"<<endl;
+  input>>c.real>>c.imag;
+  return input;
+}
+ostream &operator<<(ostream &output,Complex &c){
+  output<<"("<<c.real<<"+"<<c.imag<<"i)";
+  return output;
+}
+int main()
+{
+  Complex c1,c2,c3,c4;
+  cin>>c1>>c2;
+  cout<<"1st Complex number is:-"<<c1<<endl;
+  cout<<"2nd Complex number is:-"<<c2<<endl;
+  c3=c1+c2;
+  c4=c1*c2;
+  cout<<"Addition is:-"<<c3<<endl;
+  cout<<"Multiplication is:-"<<c4<<endl;
+  return 0; 
+}

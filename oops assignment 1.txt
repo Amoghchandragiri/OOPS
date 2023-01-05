@@ -1,0 +1,130 @@
+#include <iostream>
+#include<cstring>
+using namespace std;
+class bank
+{
+    int acc,bal;
+    string name;
+    public:
+    void read()
+    {
+        cout<<"Account No. : ";
+        cin>>acc;
+        cout<<"Name : ";
+        cin>>name;
+        cout<<"Balance : ";
+        cin>>bal;
+      }
+    void display()
+    {
+        cout<<"Account No :- "<<acc<<endl;
+        cout<<"Name :- "<<name<<endl;
+        cout<<"Balance :- "<<bal<<endl;
+    } 
+    friend void deposit(bank obj[30],int accno , int n);
+    friend void withdraw(bank obj[30],int accno ,int n);
+    friend void search(bank obj[30],int accno ,int n);  
+};
+void deposit(bank obj[30],int accno ,int n)
+    {
+        int deposit_amt;
+        cout<<"Enter Amount to deposit : ";
+        cin>>deposit_amt;
+        for(int i=0;i<n;i++)
+        {
+            if(accno==obj[i].acc)
+            {
+                obj[i].bal+=deposit_amt;
+                cout<<"Balance : "<<obj[i].bal;
+            }
+        }   
+    } 
+void withdraw(bank obj[30],int accno1 ,int n)
+    {
+        int withdraw_amt,bal;
+        cout<<"Enter Amount to Withdraw : ";
+        cin>>withdraw_amt;
+        for(int i=0;i<n;i++)
+        {
+            if(accno1==obj[i].acc)
+            {
+              if(bal>withdraw_amt){
+                obj[i].bal-=withdraw_amt;
+                cout<<"Balance : "<<obj[i].bal;
+            }
+              else{
+                cout<<"Insufficient balance"<<endl;
+              }
+        } 
+    }
+      } 
+void search(bank obj[30],int accno2 ,int n)
+    {
+        for(int i=0;i<n;i++)
+        {
+            if(accno2==obj[i].acc)
+            {
+                obj[i].display();
+            }
+          }  
+    }
+int main() 
+{
+   bank obj[30];
+   int n,ch;
+   cout<<"Enter No. of Employees : ";
+   cin>>n;
+   do{
+   cout<<"\n1.Enter Data"<<endl;
+   cout<<"2.Display Data"<<endl;
+   cout<<"3.Deposit Amount"<<endl;
+   cout<<"4.Withdraw Amount"<<endl;
+   cout<<"5.Search Account "<<endl;
+   cout<<"\nEnter Your Choice : ";
+   cin>>ch;
+   switch(ch)
+   {
+       case 1:
+       cout<<"ENTER DETAILS : "<<endl;
+       for(int i=0;i<n;i++)
+       {
+           cout<<"Enter details for account "<<i+1<<endl;
+           obj[i].read();
+       }
+       break;
+       case 2:
+       cout<<"ENTERED DETAILS ARE: "<<endl;
+       for(int i=0;i<n;i++)
+       {
+           cout<<"Entered details for account "<<i+1<<endl;
+           obj[i].display();
+       }
+       break;
+       case 3:
+        cout<<"Deposit: "<<endl;
+        int accno;
+        cout<<"Enter Account No. : ";
+        cin>>accno;
+        deposit(obj,accno,n); 
+       break;
+       case 4:
+        cout<<"Withdraw: "<<endl;
+        int accno1;
+        cout<<"Enter Account No. : ";
+        cin>>accno;
+        withdraw(obj,accno1,n);
+       break;
+       case 5:
+        cout<<"Search "<<endl;
+        int accno2;
+        cout<<"Enter Account No. : ";
+        cin>>accno2;
+        search(obj,accno2,n);
+       break;
+     default:
+     cout<<"Invalid choice entered"<<endl;
+     break;
+   }
+   }while(1);
+   return 0;
+}

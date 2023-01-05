@@ -1,0 +1,111 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+class Vehicle {
+  int mileage;
+  int price;
+public:
+  void read() {
+    cout << "Enter mileage of the vehicle:-" << endl;
+    cin >> mileage;
+    cout << "Enter price of the vehicle:-" << endl;
+    cin >> price;
+  }
+  void display() {
+    cout << "Mileage of vehicle is:-" << mileage << endl;
+    cout << "Price of the vehicle is:-" << price << endl;
+  }
+};
+class Car : public Vehicle {
+  int oc, seat_capacity, warranty;
+string fueltype;
+
+public:
+  void read() {
+    cout << "Enter ownership cost of the car:-" << endl;
+    cin >> oc;
+    cout << "Enter the seat capacity of car:-" << endl;
+    cin >> seat_capacity;
+    cout << "Enter warranty of car:-" << endl;
+    cin >> warranty;
+    cout << "Enter the fuel type of car(Diesel/Petrol):-" << endl;
+    cin >> fueltype;
+  }
+  void display() {
+    cout << "Ownership cost of the car is:-" << oc << endl;
+    cout << "Seat capacity of car:-" << seat_capacity << endl;
+    cout << "warranty of car:-" << warranty << endl;
+    cout << "Fuel Type of the car is:-" << fueltype << endl;
+  }
+};
+class Bike : public Vehicle {
+  int num_cylinder, num_gears;
+string cool_type;
+string wheel_type;
+  void read() {
+    cout << "Enter number of cylinders in bike:-" << endl;
+    cin >> num_cylinder;
+    cout << "Enter number of gears in bike:-" << endl;
+    cin >> num_gears;
+    cout << "Enter cooling type(air/liquid/diesel/petrol) of bike:-" << endl;
+    cin >> cool_type;
+    cout << "Enter wheel type of car(alloys/spokes):-" << endl;
+    cin >> wheel_type;
+  }
+};
+class Audi : public Car {
+  string model_type;
+
+public:
+  void read() {
+    cout << "Enter Model type of Audi:-" << endl;
+    cin >> model_type;
+  }
+  void display() { cout << "Model type of Audi is:-" << model_type << endl; }
+};
+class Ford : public Car {
+  string model_type1;
+public:
+  void read() {
+    cout << "Enter Model type of Ford:-" << endl;
+    cin >> model_type1;
+  }
+  void display() { cout << "Model type of Ford is:-" << model_type1 << endl; }
+};
+class Bajaj : public Bike {
+  string make_type;
+
+public:
+  void read() {
+    cout << "Enter make type of bike:-" << endl;
+    cin >> make_type;
+  }
+};
+class TVS : public Bike {
+  string make_type1;
+public:
+  void read() {
+    cout << "Enter make type of bike:-" << endl;
+    cin >> make_type1;
+  }
+};
+int main() {
+  Audi Obj;
+  Obj.read();
+  Obj.display();
+  Obj.Car::read();
+  Obj.Car::display();
+  Obj.Vehicle::read();
+  Obj.Vehicle::display();
+  Obj.read();
+  Obj.display();
+  Ford Obj1;
+  Obj1.read();
+  Obj1.display();
+  Obj1.Car::read();
+  Obj1.Car::display();
+  Obj1.Vehicle::read();
+  Obj1.Vehicle::display();
+  return 0;
+  
+}

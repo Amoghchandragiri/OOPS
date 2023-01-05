@@ -1,0 +1,59 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main() 
+{
+  int n, m, p, q, sum, carry = 0, a, b;
+  stack<int> k1, k2, k3;
+
+  cout << "Enter number of Bits for first number : ";
+  cin >> n;
+  cout << "Enter Binary Number Bits : " << endl;
+  for (int i = 0; i < n; i++)
+  {
+    cin >> p;
+    k1.push(p);
+  }
+
+  cout << "\nEnter number of bits for second number : ";
+  cin >> m;
+  cout << "Enter Binary Number Bits : " << endl;
+  for (int i = 0; i < m; i++) 
+  {
+    cin >> q;
+    k2.push(q);
+  }
+
+  while (!k1.empty() || !k2.empty()) 
+  {
+    a = 0;
+    b = 0;
+    if (!k1.empty()) 
+    {
+      a = k1.top();
+      k1.pop();
+    }
+    
+    if (!k2.empty()) 
+    {
+      b = k2.top();
+      k2.pop();
+    }
+    
+    sum = (a + b + carry) % 2;
+    carry = (a + b + carry) / 2;
+    k3.push(sum);
+  }
+  if (carry == 1) 
+  {
+    k3.push(carry);
+  }
+  
+  cout << "\nBinary Addition : ";
+  while (!k3.empty()) 
+  {
+    cout << k3.top();
+    k3.pop();
+  }
+}

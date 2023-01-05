@@ -1,0 +1,164 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+class set 
+{
+  int no;
+  string name[20];
+  public:
+  void read() 
+  {
+    cout << "Enter Number of customers : ";
+    cin >> no;
+    for (int i = 0; i < no; i++) 
+    {
+      cout << "Enter Name For customers " << i + 1 << " : ";
+      cin >> name[i];
+    }
+  }
+  void display_union(set, set);
+  void display_intersection(set, set);
+  void subtraction(set, set);
+  int remaining(int, set, set);
+};
+void set ::display_union(set p, set b) 
+{
+  set k;
+  int i, j, flag = 0;
+  k.name[20];
+  k.no = 0;
+  for (i = 0; i < p.no; i++) 
+  {
+    k.name[i] = p.name[i];
+    k.no++;
+  }
+  for (i = 0; i < b.no; i++) 
+  {
+    flag = 0;
+    for (j = 0; j < k.no; j++) 
+    {
+      if (b.name[i] == k.name[j]) 
+      {
+        flag = 1;
+        break;
+      }
+    }
+    if (flag == 0) 
+    {
+      k.name[k.no] = b.name[i];
+      k.no++;
+    }
+  }
+  // display
+  for (i = 0; i < k.no; i++) 
+  {
+    cout <<" "<<i+1<<"."<<k.name[i]<< endl;
+  }
+}
+void set ::display_intersection(set p, set b) 
+{
+  set k;
+  int i, j, flag = 0;
+  k.name[20];
+  k.no = 0;
+  for (i = 0; i < b.no; i++) 
+  {
+    for (j = 0; j < p.no; j++) 
+    {
+      if (b.name[i] == p.name[j]) 
+      {
+        k.name[k.no] = b.name[i];
+        k.no++;
+        break;
+      }
+    }
+  }
+  for (i = 0; i < k.no; i++) 
+  {
+    cout <<" "<<i+1<<"."<<k.name[i]<< endl;
+  }
+}
+void set ::subtraction(set x, set y) 
+{
+  set k;
+  int i,j,flag;
+  k.name[20];
+  k.no = 0;
+  for (i = 0; i < x.no; i++) 
+  {
+    flag = 0;
+    for (j = 0; j < y.no; j++) 
+    {
+      if (x.name[i] == y.name[j]) 
+      {
+        flag = 1;
+        break;
+      }
+    }
+    if (flag == 0) 
+    {
+      k.name[k.no] = x.name[i];
+      k.no++;
+    }
+  }
+  for (i = 0; i < k.no; i++) 
+  {
+    cout <<" "<<i+1<<"."<<k.name[i]<< endl;
+  }
+}
+int set ::remaining(int n, set p, set b) 
+{
+  int remn;
+  remn = n - (p.no + b.no);
+  return remn;
+}
+int main() 
+{
+  int ch, n;
+  set p, b, t;
+  cout << "\nEnter Total Number of customers : ";
+  cin >> n;
+  cout << "\n\nEnter details for Pizza customers : " << endl;
+  p.read();
+  cout << "\nEnter details for Burger customers : " << endl;
+  b.read();
+  do{
+    cout << "\n1.Customers who like either pizza or burger or both" << endl;
+    cout << "\n2.Customers who like both pizza and burger" << endl;
+    cout << "\n3.Customers who like only pizza, not burger" << endl;
+    cout << "\n4.Customers who like only burger, not pizza" << endl;
+    cout << "\n5.Number of customers who like neither pizza nor burger. " << endl;
+    cout << "0.Exit" << endl;
+    cout << "\nEnter Your Choice : ";
+    cin >> ch;
+    switch (ch) 
+    {
+      case 1:
+        cout << "\nCustomers who like either pizza or burger or both : " << endl;
+        t.display_union(p, b);
+      break;
+      case 2:
+        cout << "\nCustomers who like both pizza and burger : " << endl;
+        t.display_intersection(p, b);
+      break;
+      case 3:
+        cout << "\nCustomers who like only pizza, not burger : " << endl;
+        t.subtraction(p, b);
+      break;
+      case 4:
+        cout << "\nCustomers who like only burger, not pizza : " << endl;
+        t.subtraction(b, p);
+      break;
+      case 5:
+        int k;
+        k = t.remaining(n, p, b);
+        cout << "\nNumber of customers who like neither pizza nor burger : " << k
+             << endl;
+      break;
+      case 0:
+        cout<<"End";
+      break;
+    }
+    }while(1);
+  return 0;
+}

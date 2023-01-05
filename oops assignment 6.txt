@@ -1,0 +1,150 @@
+#include<iostream>
+using namespace std;
+class Matrix
+{
+int r,c;
+int a[5][5];
+public:
+void read(){
+int i,j;
+cout<<"Enter the number of rows and columns:-"<<endl;
+cin>>r>>c;
+try{
+if(r==0||r>5||c==0||c>5){
+throw 1;
+}
+else{
+for(i=0;i<r;i++){
+for(j=0;j<c;j++){
+cin>>a[i][j];
+}
+}
+}
+}  
+catch(int e){
+cout<<"Size not matched"<<endl;
+}
+}
+void display()
+{
+int i,j;
+for(i=0;i<r;i++){
+for(j=0;j<c;j++){
+cout<<a[i][j]<<" ";
+}
+cout<<endl;
+}
+}
+Matrix operator + (Matrix m2){
+int i,j;
+Matrix res;
+res.c=c;
+res.r=r;
+try{
+if(r!=m2.r||c!=m2.c){
+throw 1;
+}
+else{
+for(i=0;i<r;i++){
+for(j=0;j<c;j++){
+res.a[i][j]=a[i][j]+m2.a[i][j];
+}
+return res;
+}
+}
+  }  
+catch(int e){
+cout<<"Order of matrices is not same"<<endl;
+}
+}
+Matrix operator - (Matrix m2){
+    int i,j;
+Matrix sub;
+sub.c=c;
+sub.r=r;
+try{
+if(r!=m2.r||c!=m2.c){
+throw 1;
+}
+else{
+for(i=0;i<r;i++){
+for(j=0;j<c;j++){
+sub.a[i][j]=a[i][j]-m2.a[i][j];
+}
+}
+  return sub;
+}
+}
+catch(int e){
+cout<<"Order of matrices is not same"<<endl;
+}
+}
+Matrix operator * (Matrix m2){
+    int i,j,k;
+Matrix pro;
+pro.c=c;
+pro.r=r;
+try{
+if(c!=m2.r){
+  throw 1;
+}
+else{
+for(i=0;i<r;i++){
+for(j=0;j<c;j++){
+  pro.a[i][j]=0;
+  for(k=0;k<c;k++){
+pro.a[i][j]=pro.a[i][j]+a[i][k]*m2.a[k][j];
+}
+}
+}
+  return pro;
+}
+  }
+catch(int e){
+cout<<"Order of matrices is not same"<<endl;
+}
+  }
+};
+int main() 
+{
+  Matrix m1,m2,m3;
+  int ch;
+  cout<<"Enter first Matrix : "<<endl;
+  m1.read();
+  cout<<"\nFirst Matrix : "<<endl;
+  m1.display();
+  cout<<"\nEnter Second Matrix : "<<endl;
+  m2.read();
+  cout<<"\nSecond Matrix : "<<endl;
+  m2.display();
+  do{
+    cout<<"-----------------"<<endl;
+    cout<<"\n1.Addition"<<endl;
+    cout<<"2.Subtraction"<<endl;
+    cout<<"3.Multiplication"<<endl;
+    cout<<"Enter Your Choice : ";
+    cin>>ch;
+    switch(ch)
+    {
+      case 1:
+      cout<<"\nMatrix after Addition : "<<endl;
+      m3=m1+m2;
+      m3.display();
+      break;
+      case 2:
+      cout<<"\nMatrix after Subtraction : "<<endl;
+      m3=m1-m2;
+      m3.display();
+      break;
+      case 3:
+      cout<<"\nMatrix after Multiplication : "<<endl;
+      m3=m1*m2;
+      m3.display();
+      break;
+      default:
+      cout<<"Invalid choice"<<endl;
+      break;
+    }
+  }while(ch!=0);
+  return 0;
+  }
